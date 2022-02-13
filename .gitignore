@@ -24,3 +24,5 @@ utils.c
 libmy_malloc.so
 
 testmain.c
+
+*.test

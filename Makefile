@@ -7,9 +7,12 @@
 
 SRC =	malloc.c \
 		free.c \
+		alloc_memory.c \
+		calloc.c \
+		handle_new_block.c \
 
 CXX =		gcc
-CXXFLAGS =	-shared -W -Wall -Wextra -Werror -fPIC -I.
+CXXFLAGS =	-std=gnu17 -shared -W -Wall -Wextra -Werror -fPIC -I.
 LDFLAGS =
 NAME =		libmy_malloc.so
 CFLAGS=-g
@@ -29,8 +32,9 @@ fclean: clean
 
 re: fclean all
 
-valgrind:
-	$(CXX) -o $(NAME) $(SRC) $(CXXFLAGS) -g
+test: re
+	mv libmy_malloc.so ./tests/
+	tests/tester.bash
 
 
-.PHONY: all clean fclean re valgrind
+.PHONY: all clean fclean re test
