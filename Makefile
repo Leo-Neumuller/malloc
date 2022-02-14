@@ -10,6 +10,8 @@ SRC =	malloc.c \
 		alloc_memory.c \
 		calloc.c \
 		handle_new_block.c \
+		realloc.c \
+		reallocarray.c \
 
 CXX =		gcc
 CXXFLAGS =	-g
