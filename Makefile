@@ -12,17 +12,17 @@ SRC =	malloc.c \
 		handle_new_block.c \
 
 CXX =		gcc
-CXXFLAGS =	-g
+CXXFLAGS =	-shared -W -Wall -Wextra -Werror -fPIC -I.
 LDFLAGS =
 NAME =		libmy_malloc.so
-CFLAGS= -fPIC -I./include
+CFLAGS=-g
 
 OBJ =		$(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) ${CFLAGS} -shared -W -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(CXXFLAGS)
+	$(CXX) -o $(NAME) $(OBJ) $(CXXFLAGS)
 
 clean:
 	$(RM) $(OBJ)
