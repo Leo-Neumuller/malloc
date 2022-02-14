@@ -25,10 +25,10 @@ $(NAME): $(OBJ)
 	$(CXX) ${CFLAGS} -shared -W -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(CXXFLAGS)
 
 clean:
-	rm -r $(OBJ)
+	$(RM) $(OBJ)
 
 fclean: clean
-	rm -r $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

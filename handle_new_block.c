@@ -5,7 +5,6 @@
 ** handle_free_insert
 */
 #include "./include/my_malloc.h"
-#include "utils.c"
 
 block_t find_free_block(block_t *last, void *beginning, size_t size)
 {
