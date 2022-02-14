@@ -5,6 +5,7 @@
 ** handle_free_insert
 */
 #include "./include/my_malloc.h"
+#include "utils.c"
 
 block_t find_free_block(block_t *last, void *beginning, size_t size)
 {
@@ -21,7 +22,7 @@ block_t find_free_block(block_t *last, void *beginning, size_t size)
     return current;
 }
 
-static int get_offset_allign(void *tmp)
+int get_offset_allign(void *tmp)
 {
     int offset_alling = 0;
 
@@ -49,10 +50,35 @@ block_t handle_new_block(block_t current, block_t last, size_t size)
     return current;
 }
 
+void insert_block_if_possible(block_t current, block_t last, size_t size)
+{
+    block_t new;
+    int offset_allign = 0;
+    size_t newsize = 0;
+    void *tmp;
+
+    (void)last;
+    if ((void *)current + (BLOCKSIZE * 2) + size + 8 < (void *)current->next) {
+        new = (void *)current + BLOCKSIZE + size;
+        offset_allign = get_offset_allign((void *)new);
+        tmp = (void *)new;
+        tmp += offset_allign;
+        new = tmp;
+        newsize = (void *)current->next - ((void *)new + BLOCKSIZE);
+        set_block_metadata(new, newsize, 0);
+        new->free = 1;
+        new->nbfree = current->nbfree;
+        *new->nbfree += 1;
+        new->next = current->next;
+        current->next = new;
+    }
+}
+
 block_t handle_free_or_new(block_t current, block_t last, size_t size)
 {
     if (current != NULL) {
         set_block_metadata(current, size, 1);
+        insert_block_if_possible(current, last, size);
         *current->nbfree -= 1;
     } else {
         current = handle_new_block(current, last, size);

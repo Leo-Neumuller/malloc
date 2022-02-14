@@ -7,7 +7,6 @@
 
 #ifndef STRC_H_
 #define STRC_H_
-#include <stdio.h>
 #include <unistd.h>
 
 typedef struct block_s *block_t;
@@ -28,5 +27,6 @@ void free(void *ptr);
 void *realloc(void *ptr, size_t size);
 void *alloc_mem(void *current, size_t size);
 void *calloc(size_t nmemb, size_t size);
+int get_offset_allign(void *tmp);
 
 #endif /* !STRC_H_ */

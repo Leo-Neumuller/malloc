@@ -8,7 +8,7 @@ do
     echo "$TEST :"
     gcc $TEST -L $PWD -lmy_malloc -o $TEST.test
     echo -e -n "\t\t\t"
-    timeout 10s bash -c "LD_PRELOAD=$(pwd)/libmy_malloc.so ./$TEST.test &> /dev/null"
+    timeout 10s bash -c "LD_PRELOAD=$(pwd)/libmy_malloc.so ./$TEST.test"
     RESULT=$( echo "$?" )
     if [ $RESULT != "0" ]
     then

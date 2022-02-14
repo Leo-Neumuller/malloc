@@ -10,10 +10,13 @@ static void *handle_begining(void **beginning, size_t size, block_t *last)
 {
     block_t current;
     static int nbfree = 0;
+    int offset_allign;
 
     *beginning = alloc_mem(NULL, size);
     if (*beginning == NULL)
         return NULL;
+    offset_allign = get_offset_allign(*beginning);
+    *beginning += offset_allign;
     set_block_metadata((block_t)*beginning, size, 0);
     current = *beginning;
     current->nbfree = &nbfree;
