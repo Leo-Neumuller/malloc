@@ -12,7 +12,7 @@ void *alloc_mem(void *current, size_t size)
         current = sbrk(0);
     while ((void *)current + size + BLOCKSIZE > sbrk(0)) {
         if (sbrk(getpagesize() * 32) == (void *)-1)
-            return NULL;        
+            return NULL;
     }
     return current;
 }
