@@ -30,14 +30,19 @@ void *malloc(size_t size)
     block_t current;
     static block_t last = NULL;
 
+    my_putstr("malloc\n");
     if (beginning == NULL) {
         return handle_begining(&beginning, size, &last);
     } else {
         current = find_free_block(&last, beginning, size);
         current = handle_free_or_new(current, last, size);
-        if (current == NULL)
+        if (current == NULL) {
+            my_putstr("NULLL\n");
             return NULL;
+        }
         last = current;
+        // my_put_nbr((long int)last);
+        // myputchar('\n');
         return (void *)current + BLOCKSIZE;
     }
     return NULL;

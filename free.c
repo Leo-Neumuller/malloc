@@ -11,7 +11,12 @@ void free(void *ptr)
 {
     block_t info = ptr - BLOCKSIZE;
 
-    assert(info->free == 0);
+    my_putstr("free\n");
+
+    if (ptr == NULL)
+        return;
+    if (info->free == 1)
+        _exit(1);
     info->free = 1;
     *info->nbfree += 1;
 }

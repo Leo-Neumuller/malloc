@@ -30,5 +30,11 @@ void *calloc(size_t nmemb, size_t size);
 int get_offset_allign(void *tmp);
 void *realloc(void *ptr, size_t size);
 void *reallocarray(void *ptr, size_t nmemb, size_t size);
+void insert_block_if_possible(block_t current, size_t size);
+block_t handle_new_block(block_t current, block_t last, size_t size);
+void my_putstr(char *str);
+void my_put_nbr(long int n);
+void myputchar(char mychar);
+
 
 #endif /* !STRC_H_ */

@@ -12,6 +12,7 @@ void *calloc(size_t nmemb, size_t size)
     size_t total = nmemb * size;
     void *new = malloc(total);
 
+    my_putstr("calloc\n");
     if (new == NULL)
         return NULL;
     memset(new, 0, total);

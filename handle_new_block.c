@@ -49,14 +49,13 @@ block_t handle_new_block(block_t current, block_t last, size_t size)
     return current;
 }
 
-void insert_block_if_possible(block_t current, block_t last, size_t size)
+void insert_block_if_possible(block_t current, size_t size)
 {
     block_t new;
     int offset_allign = 0;
     size_t newsize = 0;
     void *tmp;
 
-    (void)last;
     if ((void *)current + (BLOCKSIZE * 2) + size + 8 < (void *)current->next) {
         new = (void *)current + BLOCKSIZE + size;
         offset_allign = get_offset_allign((void *)new);
@@ -77,7 +76,7 @@ block_t handle_free_or_new(block_t current, block_t last, size_t size)
 {
     if (current != NULL) {
         set_block_metadata(current, size, 1);
-        insert_block_if_possible(current, last, size);
+        insert_block_if_possible(current, size);
         *current->nbfree -= 1;
     } else {
         current = handle_new_block(current, last, size);

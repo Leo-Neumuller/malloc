@@ -12,6 +12,7 @@ SRC =	malloc.c \
 		handle_new_block.c \
 		realloc.c \
 		reallocarray.c \
+		utils.c \
 
 CXX =		gcc
 CXXFLAGS =	-g
@@ -24,7 +25,7 @@ OBJ =		$(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) ${CFLAGS} -shared -W -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(CXXFLAGS)
+	$(CXX) ${CFLAGS} -shared -W -Wall -Wextra -Werror -o $(NAME) $(OBJ) $(CXXFLAGS) -g
 
 clean:
 	$(RM) $(OBJ)

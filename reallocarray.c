@@ -8,5 +8,6 @@
 
 void *reallocarray(void *ptr, size_t nmemb, size_t size)
 {
-    return NULL;
+    my_putstr("reallocarray\n");
+    return realloc(ptr, nmemb * size);
 }
